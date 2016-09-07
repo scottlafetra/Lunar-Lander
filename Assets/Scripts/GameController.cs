@@ -20,7 +20,6 @@ public class GameController : MonoBehaviour {
 
     void Start() {
         scoreTintSwitch = GetComponent<TransparentSwitch>();
-
         //Manually trigger menu entry sequence
         OnEnterMenu();
     }
