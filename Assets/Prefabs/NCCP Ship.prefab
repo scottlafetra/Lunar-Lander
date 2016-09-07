@@ -216,7 +216,7 @@ MonoBehaviour:
   visuals: {fileID: 143422}
   rotateSpeed: -180
   acceleration: 6
-  maxCollideSpeed: 2
+  maxCollideSpeed: 3
   maxTilt: 45
   flames: {fileID: 19879572}
   delfectionSmoke: {fileID: 19830102}
