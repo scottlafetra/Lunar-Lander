@@ -2147,11 +2147,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 401735692}
   NASAPlayer: {fileID: 625635808}
-  NCCPPlayer: {fileID: 1664823821}
+  CCCPPlayer: {fileID: 0}
   NASASpawn: {fileID: 160029532}
-  NCCPSpawn: {fileID: 1928765332}
+  CCCPSpawn: {fileID: 0}
   menuUI: {fileID: 1507700832}
-  inGameUI: {fileID: 601558510}
+  inGameUI: {fileID: 1928765331}
 --- !u!4 &1748830845
 Transform:
   m_ObjectHideFlags: 0
@@ -2267,7 +2267,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1928765332}
   m_Layer: 0
-  m_Name: NCCP Spawn
+  m_Name: CCCP Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2618,7 +2618,7 @@ GameObject:
   - 114: {fileID: 2146673153}
   - 114: {fileID: 2146673152}
   m_Layer: 5
-  m_Name: NCCP Score
+  m_Name: CCCP Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

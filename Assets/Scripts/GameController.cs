@@ -7,10 +7,10 @@ public class GameController : MonoBehaviour {
     public Text scoreText;
 
     public PlayerController NASAPlayer;
-    public PlayerController NCCPPlayer;
+    public PlayerController CCCPPlayer;
 
     public Transform NASASpawn;
-    public Transform NCCPSpawn;
+    public Transform CCCPSpawn;
 
     public GameObject menuUI;   //A game object containing all menu UI
     public GameObject inGameUI; //A game object containing all menu UI
@@ -32,19 +32,19 @@ public class GameController : MonoBehaviour {
 
         //reset the player's position
         NASAPlayer.transform.Translate(NASASpawn.position - NASAPlayer.transform.position);
-        NCCPPlayer.transform.Translate(NCCPSpawn.position - NCCPPlayer.transform.position);
+        CCCPPlayer.transform.Translate(CCCPSpawn.position - CCCPPlayer.transform.position);
 
         //disable the players
         NASAPlayer.gameObject.SetActive(false);
-        NCCPPlayer.gameObject.SetActive(false);
+        CCCPPlayer.gameObject.SetActive(false);
 
         //subscribe to score updates
         NASAPlayer.ScoreChanged += new PlayerController.StatusChangedHandler(UpdateScore);
-        NCCPPlayer.ScoreChanged += new PlayerController.StatusChangedHandler(UpdateScore);
+        CCCPPlayer.ScoreChanged += new PlayerController.StatusChangedHandler(UpdateScore);
 
         //subscribe to crashed updates
         NASAPlayer.Crashed += new PlayerController.StatusChangedHandler(UpdateScore);
-        NCCPPlayer.Crashed += new PlayerController.StatusChangedHandler(UpdateScore);
+        CCCPPlayer.Crashed += new PlayerController.StatusChangedHandler(UpdateScore);
     }
 
     public void OnPlay()
@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour {
 
         //enable the players
         NASAPlayer.gameObject.SetActive(true);
-        NCCPPlayer.gameObject.SetActive(true);
+        CCCPPlayer.gameObject.SetActive(true);
 
         UpdateScore();
     }
@@ -67,14 +67,14 @@ public class GameController : MonoBehaviour {
 
     public void UpdateScore () {
         scoreText.text  = "NASA Budget: $" + NASAPlayer.GetScore() + "\n";
-        scoreText.text += "NCCP Budget: $" + NCCPPlayer.GetScore() + "\n";
+        scoreText.text += "CCCP Budget: $" + CCCPPlayer.GetScore() + "\n";
 
         if (NASAPlayer.IsDead()) {
             scoreText.text += "NASA Hull Wrecked!\n";
         }
 
-        if (NCCPPlayer.IsDead()) {
-            scoreText.text += "NCCP Hull Wrecked!\n";
+        if (CCCPPlayer.IsDead()) {
+            scoreText.text += "CCCP Hull Wrecked!\n";
         }
     }
 }
