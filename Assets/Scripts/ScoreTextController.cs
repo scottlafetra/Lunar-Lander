@@ -11,10 +11,13 @@ public class ScoreTextController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         scoreText = GetComponent<Text>();
+
+        UpdateScore();
+        trackedPlayer.ScoreChanged += new PlayerController.StatusChangedHandler(UpdateScore);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	private void UpdateScore () {
         scoreText.text = "$" + trackedPlayer.GetScore();
 	}
 }

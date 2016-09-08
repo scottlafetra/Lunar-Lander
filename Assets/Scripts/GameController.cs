@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
     public Transform NASASpawn;
     public Transform NCCPSpawn;
 
-    public GameObject menuUI; //A game object containing all menu UI
+    public GameObject menuUI;   //A game object containing all menu UI
     public GameObject inGameUI; //A game object containing all menu UI
 
     private TransparentSwitch scoreTintSwitch;
@@ -37,6 +37,14 @@ public class GameController : MonoBehaviour {
         //disable the players
         NASAPlayer.gameObject.SetActive(false);
         NCCPPlayer.gameObject.SetActive(false);
+
+        //subscribe to score updates
+        NASAPlayer.ScoreChanged += new PlayerController.StatusChangedHandler(UpdateScore);
+        NCCPPlayer.ScoreChanged += new PlayerController.StatusChangedHandler(UpdateScore);
+
+        //subscribe to crashed updates
+        NASAPlayer.Crashed += new PlayerController.StatusChangedHandler(UpdateScore);
+        NCCPPlayer.Crashed += new PlayerController.StatusChangedHandler(UpdateScore);
     }
 
     public void OnPlay()
@@ -48,6 +56,8 @@ public class GameController : MonoBehaviour {
         //enable the players
         NASAPlayer.gameObject.SetActive(true);
         NCCPPlayer.gameObject.SetActive(true);
+
+        UpdateScore();
     }
 
     public void OnExit()
@@ -55,8 +65,7 @@ public class GameController : MonoBehaviour {
         Application.Quit();
     }
 
-    // Update is called once per frame
-    void Update () {
+    public void UpdateScore () {
         scoreText.text  = "NASA Budget: $" + NASAPlayer.GetScore() + "\n";
         scoreText.text += "NCCP Budget: $" + NCCPPlayer.GetScore() + "\n";
 

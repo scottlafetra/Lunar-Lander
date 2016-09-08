@@ -22,8 +22,12 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody myRigidbody;
 
-	// Use this for initialization
-	void Start () {
+    public delegate void StatusChangedHandler();
+    public event StatusChangedHandler ScoreChanged;
+    public event StatusChangedHandler Crashed;
+
+    // Use this for initialization
+    void Start () {
         myRigidbody = GetComponent<Rigidbody>();
 
         flames.simulationSpace          = ParticleSystemSimulationSpace.World;
@@ -79,6 +83,7 @@ public class PlayerController : MonoBehaviour {
             if (collision.relativeVelocity.magnitude >= maxCollideSpeed || relTilt >= maxTilt) {
                 isDead = true;
                 setFiring(false);
+                Crashed();
 
             } else {
                 LandingPadController landingPad = collision.gameObject.GetComponent<LandingPadController>();
@@ -88,6 +93,8 @@ public class PlayerController : MonoBehaviour {
                     score += landingPad.value;
 
                     landingPad.landOn(playerNumber == 1);
+
+                    ScoreChanged();
                 }
             }
         }
