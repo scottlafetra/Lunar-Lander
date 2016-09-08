@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour {
 
     private TransparentSwitch scoreTintSwitch;
 
+    public delegate void StatusChangedHandler();
 
     void Start() {
         scoreTintSwitch = GetComponent<TransparentSwitch>();
@@ -39,12 +40,12 @@ public class GameController : MonoBehaviour {
         CCCPPlayer.gameObject.SetActive(false);
 
         //subscribe to score updates
-        NASAPlayer.ScoreChanged += new PlayerController.StatusChangedHandler(UpdateScore);
-        CCCPPlayer.ScoreChanged += new PlayerController.StatusChangedHandler(UpdateScore);
+        NASAPlayer.ScoreChanged += new StatusChangedHandler(UpdateScore);
+        CCCPPlayer.ScoreChanged += new StatusChangedHandler(UpdateScore);
 
         //subscribe to crashed updates
-        NASAPlayer.Crashed += new PlayerController.StatusChangedHandler(UpdateScore);
-        CCCPPlayer.Crashed += new PlayerController.StatusChangedHandler(UpdateScore);
+        NASAPlayer.Crashed += new StatusChangedHandler(UpdateScore);
+        CCCPPlayer.Crashed += new StatusChangedHandler(UpdateScore);
     }
 
     public void OnPlay()

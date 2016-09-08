@@ -22,9 +22,8 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody myRigidbody;
 
-    public delegate void StatusChangedHandler();
-    public event StatusChangedHandler ScoreChanged;
-    public event StatusChangedHandler Crashed;
+    public event GameController.StatusChangedHandler ScoreChanged;
+    public event GameController.StatusChangedHandler Crashed;
 
     // Use this for initialization
     void Start () {
