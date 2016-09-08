@@ -7,18 +7,11 @@ public class SpinScored : MonoBehaviour {
     public PlayerController playerB;
 
     public float changeSpeed = 1.0f;
-
-    public float winningDifference = 40;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
 	
 	// Update is called once per frame
 	void Update () {
         //Get the percent to turn
-        float percentWinning = (playerA.GetScore() - playerB.GetScore()) / winningDifference;
+        float percentWinning = (playerA.GetScore() - playerB.GetScore()) /(float) GameController.instance.winningDifference;
         percentWinning = Mathf.Clamp(percentWinning, -1, 1);
 
         //Get disired rotation

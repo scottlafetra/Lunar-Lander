@@ -10,6 +10,7 @@ public class LandingPadController : MonoBehaviour {
 
     void Start() {
         myRenderer = GetComponent<Renderer>();
+        GameController.instance.GameReset += new GameController.StatusChangedHandler(Reset);
     }
 
     public void landOn(bool isNASA) {
@@ -25,5 +26,11 @@ public class LandingPadController : MonoBehaviour {
 
     public bool isLandedOn() {
         return landedOn;
+    }
+
+    public void Reset()
+    {
+        landedOn = false;
+        myRenderer.material.color = Color.grey;
     }
 }

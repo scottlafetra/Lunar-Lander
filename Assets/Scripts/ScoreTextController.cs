@@ -13,7 +13,7 @@ public class ScoreTextController : MonoBehaviour {
         scoreText = GetComponent<Text>();
 
         UpdateScore();
-        trackedPlayer.ScoreChanged += new PlayerController.StatusChangedHandler(UpdateScore);
+        trackedPlayer.ScoreChanged += new GameController.StatusChangedHandler(UpdateScore);
 	}
 	
 	// Update is called once per frame

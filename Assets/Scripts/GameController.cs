@@ -19,10 +19,19 @@ public class GameController : MonoBehaviour {
 
     public delegate void StatusChangedHandler();
 
+    public event StatusChangedHandler GameReset;
+
+    public int winningDifference = 50;
+
+    //Singleton pointer
+    public static GameController instance;
+
     void Start() {
         scoreTintSwitch = GetComponent<TransparentSwitch>();
         //Manually trigger menu entry sequence
         OnEnterMenu();
+
+        instance = this;
     }
 
     public void OnEnterMenu()
