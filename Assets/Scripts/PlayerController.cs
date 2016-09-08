@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision) {
 
-        Debug.Log("Collision (" + collision.gameObject + "): " + collision.relativeVelocity);
+        Debug.Log("Collision (" + collision.gameObject + "): " + collision.relativeVelocity.magnitude);
 
         float relTilt = Mathf.Min(transform.rotation.eulerAngles.z, 360 - transform.rotation.eulerAngles.z);
 
