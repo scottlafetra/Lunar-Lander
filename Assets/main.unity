@@ -676,6 +676,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11470470, guid: af43e06ff837595408d8910b92f5ac86, type: 2}
+      propertyPath: maxCollideSpeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: af43e06ff837595408d8910b92f5ac86, type: 2}
   m_IsPrefabParent: 0
@@ -811,6 +815,10 @@ Prefab:
     - target: {fileID: 143532, guid: 3a127c7f17f2a314b965ea97819e1b3b, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11441416, guid: 3a127c7f17f2a314b965ea97819e1b3b, type: 2}
+      propertyPath: maxCollideSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3a127c7f17f2a314b965ea97819e1b3b, type: 2}
@@ -1983,7 +1991,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 1507700833}
   m_Layer: 5
-  m_Name: Menu Buttons
+  m_Name: Menu UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
