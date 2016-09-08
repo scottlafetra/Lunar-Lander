@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
         flames.simulationSpace          = ParticleSystemSimulationSpace.World;
         delfectionSmoke.simulationSpace = ParticleSystemSimulationSpace.World;
 
-        //set to NASA or NCCP
+        //set to NASA or CCCP
         if(playerNumber == 1) {
             visuals.GetComponent<Renderer>().material.color = Color.blue;
 
