@@ -31,6 +31,6 @@ public class LandingPadController : MonoBehaviour {
     public void Reset()
     {
         landedOn = false;
-        myRenderer.material.color = Color.grey;
+        myRenderer.material.color = Color.white;
     }
 }

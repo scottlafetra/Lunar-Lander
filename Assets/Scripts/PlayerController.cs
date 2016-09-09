@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         isFiring = false;
+
+        GameController.instance.GameReset += new GameController.StatusChangedHandler(OnReset);
     }
 
     // Update is called once per frame
@@ -97,7 +99,6 @@ public class PlayerController : MonoBehaviour {
                 }
             }
         }
-        
     }
 
     public int GetScore() {
@@ -123,4 +124,18 @@ public class PlayerController : MonoBehaviour {
     public bool IsFiring() {
         return isFiring;
     }
+
+    public void OnReset()
+    {
+        //reset the player's rotation, velocity, and angular rotation
+        myRigidbody.rotation = Quaternion.Euler(0, 0, 0);
+        myRigidbody.velocity = new Vector3(0, 0, 0);
+        myRigidbody.angularVelocity = new Vector3(0, 0, 0);
+
+        //reset score and crashed
+        score = 0;
+        isDead = false;
+    }
 }
+
+
