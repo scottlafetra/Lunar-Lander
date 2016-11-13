@@ -4,6 +4,7 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
+    public SpinScored spinScorer;
     public Text scoreText;
 
     public PlayerController NASAPlayer;
@@ -48,6 +49,8 @@ public class GameController : MonoBehaviour {
         CCCPRigidbody = CCCPPlayer.GetComponent<Rigidbody>();
 
         //subscribe to score updates
+        spinScorer.PlayerWon += new StatusChangedHandler(OnPlayerWin);
+
         NASAPlayer.ScoreChanged += new StatusChangedHandler(UpdateScore);
         CCCPPlayer.ScoreChanged += new StatusChangedHandler(UpdateScore);
 
@@ -59,6 +62,9 @@ public class GameController : MonoBehaviour {
         NASAFlag.ResetFinished += new StatusChangedHandler(OnReset);
         CCCPFlag.ResetFinished += new StatusChangedHandler(OnReset);
         TieFlag.ResetFinished += new StatusChangedHandler(OnReset);
+
+        //subscribe to wins
+        
 
         instance = this;
     }
@@ -115,16 +121,25 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    public void OnPlayerWin()
+    {
+        if (!isReseting)
+        {//Do nothing
+            ProcessEndgame();
+        }
+    }
+
     public void OnPlayerCrash()
     {
-        if (isReseting)
-        {//Do nothing
-            return;
-        }
-        else
+        if (!isReseting && (NASAPlayer.IsDead() && CCCPPlayer.IsDead()) )
         {
-            isReseting = true;
+            ProcessEndgame();
         }
+    }
+
+    private void ProcessEndgame()
+    {
+        isReseting = true;
 
         if (NASAPlayer.GetScore() > CCCPPlayer.GetScore())
         {

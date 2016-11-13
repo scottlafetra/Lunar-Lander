@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour {
                 isDead = true;
                 setFiring(false);
                 Crashed();
+                Debug.Log("Has Crashed");
 
             } else {
                 LandingPadController landingPad = collision.gameObject.GetComponent<LandingPadController>();
@@ -145,6 +146,9 @@ public class PlayerController : MonoBehaviour {
         //reset score and crashed
         score = 0;
         isDead = false;
+
+        //update subscribers
+        ScoreChanged();
     }
 }
 

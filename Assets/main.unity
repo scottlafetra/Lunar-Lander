@@ -1482,7 +1482,7 @@ Transform:
   m_GameObject: {fileID: 708489777}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3, z: 12}
-  m_LocalScale: {x: 3.53, y: 3.53, z: 3.53}
+  m_LocalScale: {x: 3.6, y: 3.6, z: 3.6}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 2046225265}
@@ -2886,6 +2886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b118b1697f0869d46b1f2bfbaea0ceef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spinScorer: {fileID: 708489779}
   scoreText: {fileID: 401735692}
   NASAPlayer: {fileID: 625635808}
   CCCPPlayer: {fileID: 1664823821}

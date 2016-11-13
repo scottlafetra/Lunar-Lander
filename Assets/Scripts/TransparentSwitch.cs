@@ -6,9 +6,10 @@ public class TransparentSwitch : MonoBehaviour {
     public List<GameObject> transparentList;
 
     private List<float> alphaValues;
+    private bool isSetup = false;
 
 	// Use this for initialization
-	void Awake () {
+	void Setup () {
         alphaValues = new List<float>();
 
         foreach (GameObject item in transparentList)
@@ -19,6 +20,13 @@ public class TransparentSwitch : MonoBehaviour {
 	
 	public void SetTransparent(bool makeTransparent)
     {
+        //to protect against being called before setup
+        if(!isSetup)
+        {
+            Setup();
+            isSetup = true;
+        }
+        
         for(int i = 0; i < transparentList.Count; ++i)
         {
             GameObject item = transparentList[i];
@@ -30,6 +38,7 @@ public class TransparentSwitch : MonoBehaviour {
                 color.g,
                 color.b,
                 makeTransparent ? 0.0f : alphaValues[i]);
+            Debug.Log(alphaValues[i]);
             
         }
     }

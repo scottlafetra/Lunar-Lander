@@ -7,9 +7,11 @@ public class SpinScored : MonoBehaviour {
     public PlayerController playerB;
 
     public float changeSpeed = 1.0f;
-	
-	// Update is called once per frame
-	void Update () {
+
+    public event GameController.StatusChangedHandler PlayerWon;
+
+    // Update is called once per frame
+    void Update () {
         //Get the percent to turn
         float percentWinning = (playerA.GetScore() - playerB.GetScore()) /(float) GameController.instance.winningDifference;
         percentWinning = Mathf.Clamp(percentWinning, -1, 1);
@@ -19,5 +21,11 @@ public class SpinScored : MonoBehaviour {
 
         //Rotate with a lerp
         transform.rotation = Quaternion.Lerp(transform.rotation, correctRotation, changeSpeed * Time.deltaTime);
+
+        //Call a win if apropriate
+        if(Mathf.Abs(percentWinning) == 1)
+        {
+            PlayerWon();
+        }
     }
 }
