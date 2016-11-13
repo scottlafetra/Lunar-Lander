@@ -38,7 +38,6 @@ public class TransparentSwitch : MonoBehaviour {
                 color.g,
                 color.b,
                 makeTransparent ? 0.0f : alphaValues[i]);
-            Debug.Log(alphaValues[i]);
             
         }
     }

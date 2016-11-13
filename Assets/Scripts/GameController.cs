@@ -38,6 +38,8 @@ public class GameController : MonoBehaviour {
 
     private bool isInMenu;
 
+    public StarCounter starCounter;
+
     //Singleton pointer
     public static GameController instance;
 
@@ -93,6 +95,9 @@ public class GameController : MonoBehaviour {
 
         battleMusic.Stop();
         themeMusic.Play();
+
+        //reset round scores
+        starCounter.ChangeStars(-starCounter.GetScore());
     }
 
     public void OnPlay()
@@ -158,10 +163,12 @@ public class GameController : MonoBehaviour {
         if (NASAPlayer.GetScore() > CCCPPlayer.GetScore())
         {
             NASAFlag.gameObject.SetActive(true);
+            starCounter.ChangeStars(1);
         }
         else if (CCCPPlayer.GetScore() > NASAPlayer.GetScore())
         {
             CCCPFlag.gameObject.SetActive(true);
+            starCounter.ChangeStars(-1);
         }
         else
         {
