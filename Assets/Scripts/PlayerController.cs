@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour {
     public event GameController.StatusChangedHandler ScoreChanged;
     public event GameController.StatusChangedHandler Crashed;
 
+    public AudioSource firingStartSound;
+    public AudioSource firingLoopSound;
+
+
     // Use this for initialization
     void Start () {
         myRigidbody = GetComponent<Rigidbody>();
@@ -115,9 +119,15 @@ public class PlayerController : MonoBehaviour {
             flames.Play();
             isFiring = true;
 
+            firingStartSound.Play();
+            firingLoopSound.Play();
+
         } else {
             flames.Stop();
             isFiring = false;
+
+            firingStartSound.Stop();
+            firingLoopSound.Stop();
         }
     }
 

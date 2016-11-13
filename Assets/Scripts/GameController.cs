@@ -32,6 +32,9 @@ public class GameController : MonoBehaviour {
     private Rigidbody NASARigidbody;
     private Rigidbody CCCPRigidbody;
 
+    public AudioSource themeMusic;
+    public AudioSource battleMusic;
+
     //Singleton pointer
     public static GameController instance;
 
@@ -69,6 +72,9 @@ public class GameController : MonoBehaviour {
         //disable the players
         NASAPlayer.gameObject.SetActive(false);
         CCCPPlayer.gameObject.SetActive(false);
+
+        battleMusic.Stop();
+        themeMusic.Play();
     }
 
     public void OnPlay()
@@ -86,6 +92,9 @@ public class GameController : MonoBehaviour {
         CCCPPlayer.gameObject.SetActive(true);
 
         UpdateScore();
+
+        themeMusic.Stop();
+        battleMusic.Play();
     }
 
     public void OnExit()
