@@ -1708,7 +1708,7 @@ MonoBehaviour:
   m_HorizontalAxis: Mouse X
   m_VerticalAxis: Mouse Y
   m_SubmitButton: Click
-  m_CancelButton: Cancel
+  m_CancelButton: Menu
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0

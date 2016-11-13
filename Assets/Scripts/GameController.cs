@@ -36,6 +36,8 @@ public class GameController : MonoBehaviour {
     public AudioSource themeMusic;
     public AudioSource battleMusic;
 
+    private bool isInMenu;
+
     //Singleton pointer
     public static GameController instance;
 
@@ -69,8 +71,18 @@ public class GameController : MonoBehaviour {
         instance = this;
     }
 
+    void Update()
+    {
+        if (!isInMenu && Input.GetButtonDown("Menu"))
+        {
+            OnEnterMenu();
+        }
+    }
+
     public void OnEnterMenu()
     {
+        isInMenu = true;
+
         scoreTintSwitch.SetTransparent(true);
         inGameUI.SetActive(false);
         menuUI.SetActive(true);
@@ -85,6 +97,8 @@ public class GameController : MonoBehaviour {
 
     public void OnPlay()
     {
+        isInMenu = false;
+
         scoreTintSwitch.SetTransparent(false);
         menuUI.SetActive(false);
         inGameUI.SetActive(true);
