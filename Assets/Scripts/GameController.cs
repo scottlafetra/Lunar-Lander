@@ -51,6 +51,11 @@ public class GameController : MonoBehaviour {
     public float padSpacingMax;
     public float edgeOfScreen;
 
+    public float scoreMultiplier = 1;
+
+    public float padValueMin;
+    public float padValueMax;
+
     void Awake() {
         scoreTintSwitch = GetComponent<TransparentSwitch>();
         //Manually trigger menu entry sequence
@@ -136,11 +141,11 @@ public class GameController : MonoBehaviour {
     private void ResetPlatforms()
     {
         //space horizontally
+        int padsInPlay = -1; //the amount of pads being used
         float currentBase = -edgeOfScreen -padSpacingMin;//start from the left and work right
         foreach (GameObject landingPad in landingPads)
         {
             landingPad.transform.position = new Vector3(currentBase + Random.Range( padSpacingMin, padSpacingMax), 0);
-            Debug.Log( "Current Base: " + currentBase + " Placed at: " + landingPad.transform.position.x );
 
             //setup next placement
             currentBase = landingPad.transform.position.x;
@@ -148,6 +153,11 @@ public class GameController : MonoBehaviour {
             //if partly offscreen, move to trash area
             if( landingPad.transform.position.x > edgeOfScreen )
             {
+                if(padsInPlay == -1 )//if has not been set
+                {
+                    padsInPlay = landingPads.IndexOf( landingPad );
+                }
+
                 landingPad.transform.position = new Vector3( edgeOfScreen + 20, 0 );
             }
         }
@@ -160,6 +170,20 @@ public class GameController : MonoBehaviour {
                     + Random.Range(-padHeightVariance, padHeightVariance)
                     + padHeightBase
                 );
+        }
+
+        //score the pads
+        float padValueMid = ( padValueMax + padValueMin ) / 2;
+        for( int i = 0; i < padsInPlay; ++i )
+        {
+            //calculate how far below the other pads this one is
+            float padDip =  ( landingPads[ (int) ModulousScreenBound.ActualModulo(i - 1, padsInPlay ) ].transform.position.y 
+                            + landingPads[ (int)ModulousScreenBound.ActualModulo( i + 1, padsInPlay ) ].transform.position.y ) / 2
+                            - landingPads[ i ].transform.position.y;
+
+            landingPads[ i ].GetComponent<LandingPadController>().value = (int)Mathf.Clamp( padValueMid + padDip * scoreMultiplier, padValueMin, padValueMax );
+
+            Debug.Log( "Score: " + landingPads[ i ].GetComponent<LandingPadController>().value + " -> " + (i + 1) + " Out of " + padsInPlay );
         }
     }
 

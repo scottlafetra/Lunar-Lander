@@ -15,7 +15,7 @@ public class ModulousScreenBound : MonoBehaviour {
             );
 	}
 
-    private float ActualModulo(float x, float y) {
+    public static float ActualModulo(float x, float y) {
         if(x >= 0) {
             return x % y;
 
