@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
@@ -42,6 +42,14 @@ public class GameController : MonoBehaviour {
 
     //Singleton pointer
     public static GameController instance;
+
+    public List<GameObject> landingPads;
+    public float padHeightVariance;
+    public float padHeightBase;
+    public float padHeightCurve;
+    public float padSpacingMin;
+    public float padSpacingMax;
+    public float edgeOfScreen;
 
     void Awake() {
         scoreTintSwitch = GetComponent<TransparentSwitch>();
@@ -120,6 +128,39 @@ public class GameController : MonoBehaviour {
 
         themeMusic.Stop();
         battleMusic.Play();
+
+        //procederally gennerate the level
+        ResetPlatforms();
+    }
+
+    private void ResetPlatforms()
+    {
+        //space horizontally
+        float currentBase = -edgeOfScreen -padSpacingMin;//start from the left and work right
+        foreach (GameObject landingPad in landingPads)
+        {
+            landingPad.transform.position = new Vector3(currentBase + Random.Range( padSpacingMin, padSpacingMax), 0);
+            Debug.Log( "Current Base: " + currentBase + " Placed at: " + landingPad.transform.position.x );
+
+            //setup next placement
+            currentBase = landingPad.transform.position.x;
+
+            //if partly offscreen, move to trash area
+            if( landingPad.transform.position.x > edgeOfScreen )
+            {
+                landingPad.transform.position = new Vector3( edgeOfScreen + 20, 0 );
+            }
+        }
+        //space vertically
+        foreach (GameObject landingPad in landingPads)
+        {
+            landingPad.transform.position = new Vector3(
+                landingPad.transform.position.x,
+                Mathf.Pow(Mathf.Abs(landingPad.transform.position.x), padHeightCurve)
+                    + Random.Range(-padHeightVariance, padHeightVariance)
+                    + padHeightBase
+                );
+        }
     }
 
     public void OnExit()
